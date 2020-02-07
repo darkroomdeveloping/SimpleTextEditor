@@ -56,7 +56,7 @@ def save_file():
     window.title(f"Simple Text Editor - {filepath}")
     
 def run():
-    btn_run.background = "red"
+    btn_run.bg = "red"
     """ run the calculation """
     print("run...")
     
