@@ -1,3 +1,3 @@
 # SimpleTextEditor
 Nice design to modify 
-Will become harvet program, I hope.
+####Will become harvest program, I hope.
