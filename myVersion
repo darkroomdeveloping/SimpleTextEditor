@@ -1,0 +1,87 @@
+# https://realpython.com/python-gui-tkinter/#building-a-text-editor-example-app
+import tkinter as tk
+import tkinter.ttk as ttk
+from tkinter.filedialog import askopenfilename, asksaveasfilename
+
+
+
+        
+def open_text_files():
+    """Open a file for editing."""
+    filepath = askopenfilename(
+        filetypes=[("Text Files", "*.txt")]
+    )
+    if not filepath:
+        return
+    txt_edit.delete(1.0, tk.END)
+    with open(filepath, "r") as input_file:
+        text = input_file.read()
+        txt_edit.insert(tk.END, text)
+    window.title(f"Simple Text Editor - {filepath}")
+
+
+def open_text_file_in_new_window():
+    """Open a file in a new window."""
+    filepath = asksaveasfilename(
+        defaultextension="csv",
+        filetypes=[("Text Files", "*.txt")]
+    
+
+    
+def save_file():
+    """Save the current file as a new file."""
+    filepath = asksaveasfilename(
+        defaultextension="csv",
+        filetypes=[("Text Files", "*.txt")]
+    )
+    if not filepath:
+        return
+    with open(filepath, "w") as output_file:
+        text = txt_edit.get(1.0, tk.END)
+        output_file.write(text)
+    window.title(f"Simple Text Editor - {filepath}")
+    
+    
+def quit():
+    """ quit the program """
+    window.destroy()
+
+
+
+
+    
+window = tk.Tk()
+window.title("Simple Text Editor")
+window.rowconfigure(0, minsize=800, weight=1)
+window.columnconfigure(1, minsize=800, weight=1)
+
+txt_edit = tk.Text(window, fg = "black")
+txt_edit_run = tk.Text(window, font = ('Times New Roman',35) )
+fr_buttons = tk.Frame(window, relief=tk.RAISED, bd=3)
+
+# - - - - -
+
+btn_open_text_files = ttk.Button(fr_buttons, text="Open Txt here", command=open_text_files)
+
+btn_open_text_file_in_new_window = ttk.Button(fr_buttons, text="Open in window", command=open_text_file_in_new_window)   #egen
+
+btn_save_file = ttk.Button(fr_buttons, text="Save", command=save_file)
+
+btn_quit = ttk.Button(fr_buttons, text="Quit", command=quit)
+
+
+#  - - - - -
+
+btn_open_text_files.grid(row=3, column=0, sticky="EW", padx=5, pady=10)
+
+btn_open_text_file_in_new_window.grid(row=4, column=0,
+                                      sticky="EW", padx=5, pady=10)   #
+
+btn_save_file.grid(row=5, column=0, sticky="EW", padx=5, pady=10)
+
+btn_quit.grid(row=6, column=0, sticky ="EW", padx=5, pady=10)
+
+fr_buttons.grid(row=0, column=0, sticky="ns")
+txt_edit.grid(row=0, column=1, sticky="nsew")
+
+window.mainloop()
